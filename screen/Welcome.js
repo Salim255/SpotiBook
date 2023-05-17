@@ -5,7 +5,7 @@ import Button from "../components/UI/Button";
 export default function Welcome() {
   return (
     <View style={styles.container}>
-      <Text>Welcome</Text>
+      <Text>Welcome to spotibook libary</Text>
       <Button>scan your card to login</Button>
     </View>
   );
