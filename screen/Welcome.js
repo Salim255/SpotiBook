@@ -1,12 +1,11 @@
-import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import Button from "../components/UI/Button";
 
-export default function Welcome() {
+export default function Welcome({ handleLogin }) {
   return (
     <View style={styles.container}>
       <Text>Welcome to spotibook libary</Text>
-      <Button>scan your card to login</Button>
+      <Button onPress={handleLogin}>scan your card to login</Button>
     </View>
   );
 }
