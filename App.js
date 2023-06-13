@@ -11,19 +11,21 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DrawerNavigator from "./navigators/drawerNavigators/DrawerNavigator";
+import SignupScreen from "./screen/SignupScreen";
+import LoginScreen from "./screen/LoginScreen";
 //import BottomTabs from "./components/BottomTabs";
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function AuthStack() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={LoginScanScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+    </Stack.Navigator>
   );
 }
-
 /* function DrawerNavigation() {
   return (
     <Drawer.Navigator
@@ -106,7 +108,8 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <DrawerNavigator />
+        {/*   <DrawerNavigator /> */}
+        <AuthStack />
       </NavigationContainer>
     </SafeAreaView>
   );
