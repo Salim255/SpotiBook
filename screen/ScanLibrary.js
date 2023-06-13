@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import Button from "../components/UI/Button";
-import ScanLibrary from "./ScanLibrary";
+import { View, Text, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import Library from "./Library";
-function LoginScanScreen() {
+import Button from "../components/UI/Button";
+import History from "./History";
+import ScanBook from "./ScanBook";
+
+function ScanLibrary() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [scanToBorrow, setScanToBorrow] = useState(false);
   const [urlString, setUrlString] = useState();
 
   useEffect(() => {
@@ -17,6 +19,13 @@ function LoginScanScreen() {
 
     getBarCodeScannerPermissions();
   }, []);
+
+  const handleScanBookToBorrow = () => {
+    setScanToBorrow(true);
+    console.log("====================================");
+    console.log("Hello from scan book11111", scanToBorrow);
+    console.log("====================================");
+  };
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
@@ -40,19 +49,20 @@ function LoginScanScreen() {
       style={StyleSheet.absoluteFillObject}
     />
   );
-
-  if (urlString) {
-    screen = <Library />;
+  if (!scanToBorrow && urlString) {
+    screen = (
+      <View>
+        <Button onPress={handleScanBookToBorrow}>Borrow</Button>
+        <Button>Return</Button>
+      </View>
+    );
+  } else if (scanToBorrow) {
+    screen = <ScanBook />;
   }
-  return (
-    <View style={styles.container}>
-      {screen}
-      {/*  <Button>Scan our cart</Button> */}
-    </View>
-  );
-}
 
-export default LoginScanScreen;
+  return <View style={styles.container}>{screen}</View>;
+}
+export default ScanLibrary;
 
 const styles = StyleSheet.create({
   container: {
