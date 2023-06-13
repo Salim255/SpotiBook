@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, ImageBackground, View, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Welcome from "./screen/Welcome";
 import { LinearGradient } from "expo-linear-gradient";
 import LoginScanScreen from "./screen/LoginScanScreen";
@@ -13,7 +13,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DrawerNavigator from "./navigators/drawerNavigators/DrawerNavigator";
 import SignupScreen from "./screen/SignupScreen";
 import LoginScreen from "./screen/LoginScreen";
-import AuthContextProvider from "./store/auth-context";
+import AuthContextProvider, { AuthContext } from "./store/auth-context";
+
 //import BottomTabs from "./components/BottomTabs";
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -27,6 +28,7 @@ function AuthStack() {
     </Stack.Navigator>
   );
 }
+
 /* function DrawerNavigation() {
   return (
     <Drawer.Navigator
@@ -104,14 +106,15 @@ export default function App() {
       </NavigationContainer>
     </LinearGradient>
   ); */
+  const authCtx = useContext(AuthContext);
 
+  console.log(authCtx, "app");
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" />
       <AuthContextProvider>
         <NavigationContainer>
-          {/*   <DrawerNavigator /> */}
-          <AuthStack />
+          {!authCtx.isAuthenticated ? <AuthStack /> : <DrawerNavigator />}
         </NavigationContainer>
       </AuthContextProvider>
     </SafeAreaView>
