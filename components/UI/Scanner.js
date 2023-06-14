@@ -1,15 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import AuthContent from "../components/Auth/AuthContent";
-import { createUser, login } from "../components/UI/auth";
-import { AuthContext } from "../store/auth-context";
+
 import { BarCodeScanner } from "expo-barcode-scanner";
-function LoginScreen() {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+import Library from "./Library";
+function LoginScanScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [urlString, setUrlString] = useState();
-  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -35,6 +32,7 @@ function LoginScreen() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
   let screen = (
     <BarCodeScanner
       onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -42,26 +40,22 @@ function LoginScreen() {
     />
   );
 
-  async function loginHandler({ email, password }) {
-    setIsAuthenticating(true);
-    try {
-      const token = await login(email, pasword);
-      authCtx.authenticate(token);
-      setIsAuthenticating(false);
-    } catch (error) {
-      Alert.alert("Please check your input");
-    }
+  if (urlString) {
+    screen = <Library />;
   }
-
-  if (isAuthenticating) {
-    return (
-      <View>
-        <Text>Loging you in...</Text>
-      </View>
-    );
-    //return <LoadingOverlay/>;
-  }
-  return <AuthContent isLogin onAuthenticate={loginHandler} />;
+  return (
+    <View style={styles.container}>
+      {screen}
+      {/*  <Button>Scan our cart</Button> */}
+    </View>
+  );
 }
 
-export default LoginScreen;
+export default LoginScanScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+});
