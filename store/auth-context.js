@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { log } from "react-native-reanimated";
 export const AuthContext = createContext({
   token: "",
   isAuthenticated: false,
@@ -8,7 +9,9 @@ export const AuthContext = createContext({
 
 function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
+
   function authenticate(token) {
+    console.log("from provider", !!token);
     setAuthToken(token);
   }
 
@@ -22,7 +25,7 @@ function AuthContextProvider({ children }) {
     authenticate: authenticate,
     logout: logout,
   };
-
+  console.log(value.token, "jjj", value.isAuthenticated);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

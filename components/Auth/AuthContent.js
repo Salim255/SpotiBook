@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert, View, Text, Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-
+import AuthForm from "./AuthForm";
 function AuthContent({ isLogin, onAuthenticate }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
@@ -48,12 +48,21 @@ function AuthContent({ isLogin, onAuthenticate }) {
           style={StyleSheet.absoluteFillObject}
         />
       ) : (
-        <View>
-          <Text>Create new user</Text>
-        </View>
+        <AuthForm
+          isLogin={isLogin}
+          onSubmit={submitHandler}
+          credentialsInvalid={credentialsInvalid}
+        />
       )}
 
       <View style={styles.buttons}>
+        {isLogin && (
+          <View style={styles.btnInner}>
+            <Pressable onPress={testNext}>
+              <Text style={styles.btnText}>next page</Text>
+            </Pressable>
+          </View>
+        )}
         <View style={styles.btnInner}>
           <Pressable onPress={switchAuthModeHandler}>
             <Text style={styles.btnText}>
@@ -70,7 +79,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       
     </View> */
   }
-  console.log(hasPermission, screen);
+
   function switchAuthModeHandler() {
     if (isLogin) {
       navigation.replace("Signup");
@@ -81,6 +90,10 @@ function AuthContent({ isLogin, onAuthenticate }) {
     }
   }
 
+  function testNext(credentilas) {
+    let { email, confirmEmail, password, confirmPassword } = credentilas;
+    onAuthenticate({ email, password });
+  }
   function submitHandler(credentilas) {
     let { email, confirmEmail, password, confirmPassword } = credentilas;
     email = email.trim();
@@ -102,7 +115,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
         password: !passwordIsValid,
         confirmPassword: !passwordIsValid || !passwordsAreEqual,
       });
-
+      // onAuthenticate({ email, password });
       return;
     }
     // shuld be fild with scan result credentialsInvalid

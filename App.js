@@ -61,6 +61,20 @@ function AuthStack() {
     </Drawer.Navigator>
   );
 }  */
+
+function Navigation() {
+  const authCtx = useContext(AuthContext);
+
+  console.log("🔴", authCtx.isAuthenticated, "app");
+
+  return (
+    <NavigationContainer>
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <DrawerNavigator />}
+    </NavigationContainer>
+  );
+}
+
 export default function App() {
   /*  const [login, setLogin] = useState(false);
   const handleLogin = () => {
@@ -106,16 +120,12 @@ export default function App() {
       </NavigationContainer>
     </LinearGradient>
   ); */
-  const authCtx = useContext(AuthContext);
 
-  console.log(authCtx, "app");
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" />
       <AuthContextProvider>
-        <NavigationContainer>
-          {!authCtx.isAuthenticated ? <AuthStack /> : <DrawerNavigator />}
-        </NavigationContainer>
+        <Navigation />
       </AuthContextProvider>
     </SafeAreaView>
   );

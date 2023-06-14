@@ -13,7 +13,6 @@ function Input({
       <Text style={[styles.label, isInvalid && styles.labelInvalid]}></Text>
       <TextInput
         style={[styles.input, isInvalid && styles.inputInvalid]}
-        autoCapitalize={false}
         keyboardType={keyboardType}
         secureTextEntry={secure}
         onChangeText={onUpdateValue}

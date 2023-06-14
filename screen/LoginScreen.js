@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
-import { createUser, login } from "../components/UI/auth";
+import { login } from "../components/UI/auth";
 import { AuthContext } from "../store/auth-context";
 import { BarCodeScanner } from "expo-barcode-scanner";
 function LoginScreen() {
@@ -45,7 +45,9 @@ function LoginScreen() {
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, pasword);
+      console.log("from loginscreeen");
+      const token = await login(email, password);
+      console.log(token, "hellojjj");
       authCtx.authenticate(token);
       setIsAuthenticating(false);
     } catch (error) {
