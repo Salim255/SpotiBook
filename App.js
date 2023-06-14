@@ -65,8 +65,6 @@ function AuthStack() {
 function Navigation() {
   const authCtx = useContext(AuthContext);
 
-  console.log("🔴", authCtx.isAuthenticated, "app");
-
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
