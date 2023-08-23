@@ -24,18 +24,38 @@ function BookDetailsModal() {
             />
             <Text style={styles.modalText}>One Hundred Years of Solitude</Text>
 
-            <View>
-              <Text style={styles.textStyle}>Author:</Text>
-              <Text>Gabriel García Márquez</Text>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.textStyle}></Text>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Author: </Text>
+                <Text style={styles.textContainerDetails}>
+                  Gabriel García Márquez
+                </Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Original title:</Text>
+                <Text style={styles.textContainerDetails}>
+                  Cien años de soledad
+                </Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Translator:</Text>
+                <Text style={styles.textContainerDetails}>Gregory Rabassa</Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Country:</Text>
+                <Text style={styles.textContainerDetails}>Argentina</Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Language:</Text>
+                <Text style={styles.textContainerDetails}>Spanish</Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.textContainerTitle}>Genre:</Text>
+                <Text style={styles.textContainerDetails}>Magic realism</Text>
+              </View>
             </View>
-
-            <Text>Original title: Cien años de soledad</Text>
-            <Text>Translator: Gregory Rabassa</Text>
-            <Text>Country: Argentina</Text>
-            <Text>Language: Spanish </Text>
-            <Text>Genre: Magic realism</Text>
-
-            <View>
+            <View style={styles.btnContainer}>
               <Button
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -76,7 +96,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: "12%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -98,21 +118,44 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+  btnContainer: {
+    flexDirection: "row",
+    marginTop: 40,
+    marginBottom: -40,
+  },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  detailsContainer: {
+    marginBottom: 8,
+  },
+  textContainer: {
+    flexDirection: "row",
+  },
+  textContainerTitle: {
+    fontSize: 18,
+    fontWeight: 600,
+    margin: 2,
+  },
+  textContainerDetails: {
+    alignSelf: "center",
+    marginTop: 2,
     fontSize: 14,
+    marginLeft: 4,
+  },
+  modalText: {
+    marginBottom: 1,
+    marginTop: 15,
+    textAlign: "center",
     fontWeight: 700,
+    fontSize: 20,
   },
 
   bookStyle: {
     height: 100,
-    width: 120,
+    width: 160,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },

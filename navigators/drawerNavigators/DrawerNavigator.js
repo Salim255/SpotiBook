@@ -6,6 +6,7 @@ import MyRewardsStackNavigator from "../stackNavigators/MyRewardsStackNavigator"
 import LocationsStackNavigator from "../stackNavigators/LocationsStackNavigator";
 import BottomTabNavigator from "../tabNavigators/BottomTabNavigator";
 import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
 const Drawer = createDrawerNavigator();
 
@@ -22,18 +23,15 @@ const DrawerNavigator = () => {
         drawerActiveBackgroundColor: "#7c2900",
         drawerActiveTintColor: "white",
         drawerInactiveTintColor: "#140a04",
-
         headerTintColor: "#ff7700",
-
-        headerStyle: { backgroundColor: ["#d3c8c8", "#360000", "#3d007a"] },
       }}
     >
       <Drawer.Screen
         name="SpoTiBoOk"
         options={{
           headerTransparent: true,
-          drawerIcon: ({ color }) => (
-            <Ionicons name="home" color={color} size={24} />
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
           ),
         }}
         component={BottomTabNavigator}
@@ -42,8 +40,8 @@ const DrawerNavigator = () => {
         name="History"
         options={{
           headerTransparent: true,
-          drawerIcon: ({ color }) => (
-            <Ionicons name="time" color={color} size={24} />
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="time" color={color} size={size} />
           ),
         }}
         component={MyRewardsStackNavigator}
@@ -52,8 +50,9 @@ const DrawerNavigator = () => {
         name="Profile"
         options={{
           headerTransparent: true,
-          drawerIcon: ({ color }) => (
-            <Ionicons name="person" color={color} size={24} />
+
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
           ),
         }}
         component={LocationsStackNavigator}

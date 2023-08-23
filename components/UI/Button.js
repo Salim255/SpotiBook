@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     margin: 4,
-    backgroundColor: Colors.primary500,
+    backgroundColor: "#ff7700",
     color: Colors.gray700,
     elevation: 2,
     shadowColor: "black",

@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import AuthContent from "../components/Auth/AuthContent";
 import { login } from "../components/UI/auth";
 import { AuthContext } from "../store/auth-context";
 import { BarCodeScanner } from "expo-barcode-scanner";
+
 function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
@@ -45,7 +48,7 @@ function LoginScreen() {
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      console.log("from loginscreeen");
+      console.log("from loginScreen");
       const token = await login(email, password);
       console.log(token, "hellojjj");
       authCtx.authenticate(token);
@@ -57,9 +60,21 @@ function LoginScreen() {
 
   if (isAuthenticating) {
     return (
-      <View>
-        <Text>Loging you in...</Text>
-      </View>
+      <LinearGradient
+        colors={["#041e22", "#0b4e58", "#14899b", "#51bccd", "#0bd3f1"]}
+        style={styles.rootScreen}
+      >
+        <ImageBackground
+          source={require("../assets/images/back.jpg")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundIage}
+        >
+          <View>
+            <Text>Loging you in...</Text>
+          </View>
+        </ImageBackground>
+      </LinearGradient>
     );
     //return <LoadingOverlay/>;
   }
@@ -67,3 +82,11 @@ function LoginScreen() {
 }
 
 export default LoginScreen;
+const styles = StyleSheet.create({
+  rootScreen: {
+    flex: 1,
+  },
+  backgroundIage: {
+    opacity: 0.7,
+  },
+});

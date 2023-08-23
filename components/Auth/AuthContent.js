@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Alert, View, Text, Pressable, StyleSheet } from "react-native";
+import {
+  Alert,
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import AuthForm from "./AuthForm";
+
+import { LinearGradient } from "expo-linear-gradient";
+
 function AuthContent({ isLogin, onAuthenticate }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
@@ -121,14 +131,28 @@ function AuthContent({ isLogin, onAuthenticate }) {
     // shuld be fild with scan result credentialsInvalid
     onAuthenticate({ email, password });
   }
-  return <View style={styles.authContent}>{screen}</View>;
+  return (
+    <LinearGradient
+      colors={["#041e22", "#0b4e58", "#14899b", "#51bccd", "#0bd3f1"]}
+      style={styles.rootScreen}
+    >
+      <ImageBackground
+        source={require("../../assets/images/back.jpg")}
+        resizeMode="cover"
+        style={styles.rootScreen}
+        imageStyle={styles.backgroundIage}
+      >
+        <View style={styles.authContent}>{screen}</View>
+      </ImageBackground>
+    </LinearGradient>
+  );
 }
 
 export default AuthContent;
 
 const styles = StyleSheet.create({
   authContent: {
-    marginTop: 64,
+    marginTop: 150,
     marginHorizontal: 32,
     padding: 16,
 
@@ -147,7 +171,8 @@ const styles = StyleSheet.create({
   },
 
   btnInner: {
-    backgroundColor: "red",
+    //backgroundColor: "red",
+    //color: "#ff7700",
     alignItems: "center",
     padding: 6,
     borderBottomEndRadius: 20,
@@ -165,5 +190,11 @@ const styles = StyleSheet.create({
   scanner: {
     flex: 0.5,
     justifyContent: "center",
+  },
+  rootScreen: {
+    flex: 1,
+  },
+  backgroundIage: {
+    opacity: 0.7,
   },
 });
