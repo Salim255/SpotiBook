@@ -1,5 +1,4 @@
 import React from "react";
-
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 const Stack = createStackNavigator();
 
-const Locations = () => (
+const Community = () => (
   <LinearGradient colors={["#000000", "#a23b04"]} style={styles.rootScreen}>
     <View style={styles.profileContainer}>
       <View style={styles.profileHeader}>
@@ -23,7 +22,7 @@ const Locations = () => (
               borderWidth: 5,
             }}
           />
-          <Text style={styles.profileName}>Salim Hassan</Text>
+          <Text style={styles.profileName}>Community</Text>
         </View>
       </View>
     </View>
@@ -52,8 +51,7 @@ const Locations = () => (
     </View>
   </LinearGradient>
 );
-
-const LocationsStackNavigator = () => {
+const SpotiBookCommunity = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -63,13 +61,13 @@ const LocationsStackNavigator = () => {
       <Stack.Screen
         name="Locations"
         options={{ headerTransparent: true }}
-        component={Locations}
+        component={Community}
       />
     </Stack.Navigator>
   );
 };
 
-export default LocationsStackNavigator;
+export default SpotiBookCommunity;
 
 const styles = StyleSheet.create({
   rootScreen: {

@@ -5,6 +5,7 @@ import HomeStackNavigator from "../stackNavigators/HomeStackNavigator";
 import MyRewardsStackNavigator from "../stackNavigators/MyRewardsStackNavigator";
 import LocationsStackNavigator from "../stackNavigators/LocationsStackNavigator";
 import BottomTabNavigator from "../tabNavigators/BottomTabNavigator";
+import SpotiBookCommunity from "../stackNavigators/SpotiBookCommunity";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
@@ -45,6 +46,17 @@ const DrawerNavigator = () => {
           ),
         }}
         component={MyRewardsStackNavigator}
+      />
+      <Drawer.Screen
+        name="SpotiCommunity"
+        options={{
+          headerTransparent: true,
+
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="people" color={color} size={size} />
+          ),
+        }}
+        component={SpotiBookCommunity}
       />
       <Drawer.Screen
         name="Profile"

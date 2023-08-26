@@ -1,12 +1,100 @@
 import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
-
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import BookItem from "../../components/BookItem";
+import Book from "../../models/book";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  FlatList,
+} from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 const Stack = createStackNavigator();
-
+function renderBookItem(itemData) {
+  return <BookItem name={itemData.item.name} />;
+}
+const BOOKS = [
+  new Book(
+    "1",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "2",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "3",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "4",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "5",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "6",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+  new Book(
+    "7",
+    "title",
+    "author",
+    "cover",
+    "originalTitle",
+    "translator",
+    "country",
+    "language",
+    "genre"
+  ),
+];
 const MyRewards = () => (
   <LinearGradient
     colors={["#041e22", "#0b4e58", "#14899b", "#51bccd", "#0bd3f1"]}
@@ -18,9 +106,13 @@ const MyRewards = () => (
       style={styles.rootScreen}
       imageStyle={styles.backgroundIage}
     >
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>My recent booking!</Text>
-      </View>
+      <FlatList
+        data={BOOKS}
+        keyExtractor={(item) => item.id}
+        renderItem={renderBookItem}
+        numColumns={2}
+        style={styles.list}
+      />
     </ImageBackground>
   </LinearGradient>
 );
@@ -48,5 +140,10 @@ const styles = StyleSheet.create({
   },
   backgroundIage: {
     opacity: 0.7,
+  },
+
+  bookItem: {},
+  list: {
+    marginTop: 150,
   },
 });
