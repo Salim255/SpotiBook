@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+import QRCode from "react-native-qrcode-svg";
 import Input from "./Input";
 import Button from "../UI/Button";
 
@@ -40,6 +41,15 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
       password: enteredPassword,
       confirmPassword: enteredConfirmPassword,
     });
+
+    console.log("====================================");
+    console.log(
+      enteredEmail,
+      enteredConfirmEmail,
+      enteredPassword,
+      enteredConfirmPassword
+    );
+    console.log("====================================");
   }
   return (
     <View style={styles.form}>
@@ -83,6 +93,10 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           <Button onPress={submitHandler}>
             {isLogin ? "Log In" : "Sign Up"}
           </Button>
+
+          <Text>
+            <QRCode value="hey" />
+          </Text>
         </View>
       </View>
     </View>

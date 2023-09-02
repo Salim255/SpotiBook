@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AuthContent from "../components/Auth/AuthContent";
 import { login } from "../components/UI/auth";
