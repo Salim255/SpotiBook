@@ -3,7 +3,8 @@ import { View, StyleSheet, Text } from "react-native";
 
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Library from "./Library";
-function LoginScanScreen() {
+import { log } from "react-native-reanimated";
+function LoginScanScreen(mode) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [urlString, setUrlString] = useState();
@@ -21,8 +22,12 @@ function LoginScanScreen() {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     let url = data;
+
+    console.log("====================================");
+    console.log(data.id);
+    console.log("====================================");
     if (data) {
-      setUrlString(url);
+      //setUrlString(url);
     }
   };
 

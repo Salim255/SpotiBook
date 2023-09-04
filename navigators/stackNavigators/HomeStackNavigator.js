@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import BookDetailsModal from "../../components/UI/BookDetailsModal";
+import { AuthContext } from "../../store/auth-context";
+import { getScanLibrary } from "../../util/http";
+import { testSalim } from "../../util/http";
 const Stack = createStackNavigator();
 
 const Home = () => {
@@ -17,18 +20,46 @@ const Home = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [popBookDetails, setPopBookDetails] = useState(false);
-  const getBarCodeScannerPermissions = async () => {
+  const authCtx = useContext(AuthContext);
+  const [scannedLibary, setLibrary] = useState(null);
+
+  useEffect(() => {
+    console.log("====================================");
+    console.log("Hello Again libary");
+    console.log("====================================");
+    const getBarCodeScannerPermissions = async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    };
+
+    getBarCodeScannerPermissions();
+  }, []);
+
+  /*  const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
-  };
-  getBarCodeScannerPermissions();
-  const handleBarCodeScanned = ({ type, data }) => {
+  }; */
+  //getBarCodeScannerPermissions();
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    alert(
+      `Bar code with type library ${type} and data ${data} has been scanned!`
+    );
     let url = data;
-    if (data) {
-      setUrlString(url);
+    console.log("====================================");
+    console.log("url", data, "url", url);
+    console.log("====================================");
+
+    async function getLib() {
+      const library = await testSalim(1);
+      console.log("====================================");
+      console.log(library, "👾👾👾");
+      console.log("====================================");
     }
+    getLib();
+
+    //sendSimple();
+    //authCtx.getLibrary();
   };
 
   if (hasPermission === null) {

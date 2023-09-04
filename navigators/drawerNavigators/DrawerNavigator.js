@@ -6,9 +6,11 @@ import MyRewardsStackNavigator from "../stackNavigators/MyRewardsStackNavigator"
 import LocationsStackNavigator from "../stackNavigators/LocationsStackNavigator";
 import BottomTabNavigator from "../tabNavigators/BottomTabNavigator";
 import SpotiBookCommunity from "../stackNavigators/SpotiBookCommunity";
+import Settings from "../stackNavigators/Settings";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
+import UsersContextProvider from "../../store/users-context";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
@@ -58,6 +60,7 @@ const DrawerNavigator = () => {
         }}
         component={SpotiBookCommunity}
       />
+
       <Drawer.Screen
         name="Profile"
         options={{
@@ -69,6 +72,18 @@ const DrawerNavigator = () => {
         }}
         component={LocationsStackNavigator}
       />
+
+      {/* <Drawer.Screen
+        name="Settings"
+        options={{
+          headerTransparent: true,
+
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="settings" color={color} size={size} />
+          ),
+        }}
+        component={Settings}
+      /> */}
     </Drawer.Navigator>
   );
 };

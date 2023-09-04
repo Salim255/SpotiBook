@@ -1,27 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../../store/auth-context";
 const Stack = createStackNavigator();
 
 const Book = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    const getBarCodeScannerPermissions = async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    };
 
-  const getBarCodeScannerPermissions = async () => {
+    getBarCodeScannerPermissions();
+  }, []);
+
+  /*  const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
   };
-  getBarCodeScannerPermissions();
+  getBarCodeScannerPermissions(); */
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    alert(
+      `Bar code with type salim2 ${type} and data ${data} has been scanned!`
+    );
     let url = data;
     if (data) {
-      setUrlString(url);
+      //setUrlString(url);
+      authCtx.setBarrowBook(1);
     }
   };
 

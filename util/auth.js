@@ -15,13 +15,11 @@ async function authenticate(mode, data) {
   return "token";
 }
 export async function createUser(data) {
-  const response = await axios.post("localhost:4000/api/v1/users/signup", data);
-  return authenticate("signUp", email, password);
+  return await authenticate("signUp", email, password);
 }
 
 export async function login(email, password) {
-  console.log("hello");
   const token = await authenticate("signin", { email, password });
 
-  return "token";
+  return token;
 }

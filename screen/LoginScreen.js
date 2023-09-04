@@ -11,7 +11,8 @@ function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [urlString, setUrlString] = useState();
+
+  const [userId, setUserId] = useState("");
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
@@ -19,16 +20,29 @@ function LoginScreen() {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     };
-
+    console.log("====================================");
+    console.log("Hello From loginScreen useEffect");
+    console.log("====================================");
     getBarCodeScannerPermissions();
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    console.log("====================================");
+    console.log(data, data.id);
+    console.log("====================================");
+
+    alert(
+      `Bar code with type Salimllll ${type} and data ${data} has been scanned!`
+    );
     let url = data;
+    console.log("====================================");
+    console.log(url, "data👻👻👻");
+    console.log("====================================");
     if (data) {
-      setUrlString(url);
+      //setUrlString(url);
+      setUserId(data.id);
+      authCtx.getUserId(data.id);
     }
   };
 
@@ -45,12 +59,21 @@ function LoginScreen() {
     />
   );
 
-  async function loginHandler({ email, password }) {
+  async function loginHandler() {
+    console.log("====================================");
+    console.log(userId, "hello user id ");
+    console.log("====================================");
     setIsAuthenticating(true);
     try {
       console.log("from loginScreen");
-      const token = await login(email, password);
-      console.log(token, "hellojjj");
+      //const  handleBarCodeScanned();
+      const token = await login();
+      console.log("====================================");
+      console.log(token, "Hello login token");
+      console.log("====================================");
+      if (!token) {
+        authCtx.authenticate("1");
+      }
       authCtx.authenticate(token);
       setIsAuthenticating(false);
     } catch (error) {

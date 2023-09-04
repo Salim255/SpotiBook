@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Alert,
   View,
@@ -10,8 +10,11 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import AuthForm from "./AuthForm";
+import { AuthContext } from "../../store/auth-context";
 
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
+import { log } from "react-native-reanimated";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -19,6 +22,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
   const [scanned, setScanned] = useState(false);
   const [urlString, setUrlString] = useState();
   const navigation = useNavigation();
+  const authCtx = useContext(AuthContext);
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,
@@ -37,10 +41,22 @@ function AuthContent({ isLogin, onAuthenticate }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    let url = data;
+    alert(`Bar code with type 🎃🎃 ${type} and data ${data} has been scanned!`);
+    //let url = JSON.stringify(data);
+
+    //let url = data;
+    console.log("====================================");
+    console.log(data, "Url  🎃🎃");
+    console.log("====================================");
     if (data) {
-      setUrlString(url);
+      console.log("====================================");
+      console.log("Hello data 😈😈🤡");
+      console.log("====================================");
+      //setUrlString(url);
+      //sendSimple();
+      //authCtx.getUserId(1);
+      authCtx.authenticate("1");
+      //testNext();
     }
   };
 
@@ -100,16 +116,15 @@ function AuthContent({ isLogin, onAuthenticate }) {
     }
   }
 
-  function testNext(credentilas) {
-    let { email, confirmEmail, password, confirmPassword } = credentilas;
-    onAuthenticate({ email, password });
+  function testNext() {
+    onAuthenticate({ email: "", password: "" });
   }
-  function submitHandler(credentilas) {
-    let { email, confirmEmail, password, confirmPassword } = credentilas;
+  function submitHandler(credentials) {
+    let { email, confirmEmail, password, confirmPassword } = credentials;
     email = email.trim();
     password = password.trim();
     const emailIsValid = email.includes("@");
-    const passwordIsValid = password.length > 6;
+    const passwordIsValid = password.length > 3;
     const emailsAreEqual = email === confirmEmail;
     const passwordsAreEqual = password === confirmPassword;
 

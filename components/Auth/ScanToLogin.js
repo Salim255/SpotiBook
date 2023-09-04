@@ -23,7 +23,7 @@ function ScanToLogin() {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     let url = data;
     if (data) {
-      setUrlString(url);
+      //setUrlString(url);
     }
   };
 
